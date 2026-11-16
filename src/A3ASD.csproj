@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>A3ASD</AssemblyName>
+    <RootNamespace>A3ASD</RootNamespace>
+    <ApplicationIcon>asd.ico</ApplicationIcon>
+    <!-- 위성 리소스 제외: SqlClient 오류 메시지도 영어 기본값만 사용(로그창 영어 통일, 용량 절감) -->
+    <!-- No satellite resources: SqlClient messages fall back to built-in English (English-only log, smaller size) -->
+    <SatelliteResourceLanguages>en</SatelliteResourceLanguages>
+    <!-- 빌드 시각(로컬)을 InformationalVersion 에 새긴다 → 시작 로그 "build=" 로 어느 빌드인지 확인 -->
+    <!-- Stamp the local build time into InformationalVersion so the start log shows which build is running -->
+    <SourceRevisionId>$([System.DateTime]::Now.ToString("yyyyMMdd.HHmmss"))</SourceRevisionId>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.2.2" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="asd.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="H3DB.ini"><CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory></None>
+  </ItemGroup>
+</Project>
